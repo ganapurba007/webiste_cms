@@ -70,11 +70,11 @@ class Dashboard extends CI_Controller
             } else {
                 //alihkan halaman kembali kembali ke halaman ganti password
                 redirect('dashboard/ganti_password?alert=gagal');
-            } else {
-                $this->load->view('dashboard/v_header');
-                $this->load->view('dashboard/v_ganti_password');
-                $this->load->view('dashboard/v_footer');
             }
+        } else {
+            $this->load->view('dashboard/v_header');
+            $this->load->view('dashboard/v_ganti_password');
+            $this->load->view('dashboard/v_footer');
         }
     }
 }
