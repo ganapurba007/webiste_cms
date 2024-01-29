@@ -28,4 +28,11 @@ maka halaman akan di alihkan kembali ke halaman login.
         $this->session->sess_destroy();
         redirect('login');
     }
+
+    function ganti_password()
+    {
+        $this->load->view('dashboard/v_header');
+        $this->load->view('dashboard/v_ganti_password');
+        $this->load->view('dashboard/v_footer');
+    }
 }
