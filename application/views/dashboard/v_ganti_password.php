@@ -21,7 +21,7 @@
                         <div class="card-header">
                             <h3 class="card-title">
                                 <i class="fas fa-lock"></i>
-                                Ganti Password <small> Ubah Password Anda</small>
+                                Ganti Password |<small> Ubah Password Anda</small>
                             </h3>
                         </div><!-- /.card-header -->
                         <div class="card-body">
@@ -41,24 +41,24 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label>Password Lama</label>
-                                        <input type="password" class="formcontrol" name="password_lama" placeholder="Masukan Password Lama Anda" requi red>
+                                        <input type="password" class="form-control" name="password_lama" placeholder="Masukan Password Lama Anda" requi red>
                                         <?php echo form_error('password_lama'); ?>
                                     </div>
                                     <hr>
                                     <div class="form-group">
                                         <label>Password Baru</label>
-                                        <input type="password" class="formcontrol" name="password_baru" placeholder="Masukan Passwor Baru Anda" requir ed>
+                                        <input type="password" class="form-control" name="password_baru" placeholder="Masukan Passwor Baru Anda" requir ed>
                                         <?php echo form_error('password_baru'); ?>
                                     </div>
                                     <div class="form-group">
                                         <label>Konfirmasi Password Baru</label>
-                                        <input type="password" class="formcontrol" name="konfirmasi_password" placeholder="Ulangi Passwor Baru Anda" r equired>
+                                        <input type="password" class="form-control" name="konfirmasi_password" placeholder="Ulangi Passwor Baru Anda" r equired>
                                         <?php echo form_error('konfirmasi_password'); ?>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
-                                    <input type="submit" class="btn btnprimary" value="Ganti Password">
+                                    <input type="submit" class="btn btn-primary" value="Ganti Password">
                                 </div>
                             </form>
                         </div><!-- /.card-body -->
