@@ -106,4 +106,15 @@ class Dashboard extends CI_Controller
             $this->load->view('dashboard/v_footer');
         }
     }
+
+    public function kategori_edit($id)
+    {
+        $where = array(
+            'kategori_id' => $id
+        );
+        $data['kategori'] = $this->m_data->edit_data('kategori', $where)->result();
+        $this->load->view('dashboard/v_header');
+        $this->load->view('dashboard/v_kategori_edit ', $data);
+        $this->load->view('dashboard/v_footer');
+    }
 }
