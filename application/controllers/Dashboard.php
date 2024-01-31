@@ -84,4 +84,26 @@ class Dashboard extends CI_Controller
         $this->load->view('dashboard/v_kategori_tambah');
         $this->load->view('dashboard/v_footer');
     }
+
+    public function kategori_tambah_aksi()
+    {
+        $this->form_validation->set_rules(
+            'kategori',
+            'Kategori',
+            'required'
+        );
+        if ($this->form_validation->run() != false) {
+            $kategori = $this->input->post('kategori');
+            $data = array(
+                'kategori_nama' => $kategori,
+                'kategori_slug' => strtolower(url_title($kategori))
+            );
+            $this->m_data->insert_data('kategori', $data);
+            redirect(base_url() . 'dashboard/kategori');
+        } else {
+            $this->load->view('dashboard/v_header');
+            $this->load->view('dashboard/v_kategori_tambah');
+            $this->load->view('dashboard/v_footer');
+        }
+    }
 }
