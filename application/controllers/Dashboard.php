@@ -117,6 +117,7 @@ class Dashboard extends CI_Controller
         $this->load->view('dashboard/v_kategori_edit', $data);
         $this->load->view('dashboard/v_footer');
     }
+
     public function kategori_update()
     {
         $this->form_validation->set_rules('kategori', 'Kategori', 'required');
@@ -142,5 +143,14 @@ class Dashboard extends CI_Controller
             $this->load->view('dashboard/v_kategori_edit', $data);
             $this->load->view('dashboard/v_footer');
         }
+    }
+
+    public function kategori_hapus($id)
+    {
+        $where = array(
+            'kategori_id' => $id
+        );
+        $this->m_data->delete_data('kategori', $where);
+        redirect(base_url() . 'dashboard/kategori');
     }
 }
