@@ -114,7 +114,7 @@ class Dashboard extends CI_Controller
         );
         $data['kategori'] = $this->m_data->edit_data('kategori', $where)->result();
         $this->load->view('dashboard/v_header');
-        $this->load->view('dashboard/v_kategori_edit ', $data);
+        $this->load->view('dashboard/v_kategori_edit', $data);
         $this->load->view('dashboard/v_footer');
     }
     public function kategori_update()
@@ -130,16 +130,16 @@ class Dashboard extends CI_Controller
                 'kategori_nama' => $kategori,
                 'kategori_slug' => strtolower(url_title($kategori))
             );
-            $this->m_data->update_data(' katego ri', $data, $where);
+            $this->m_data->update_data('kategori', $data, $where);
             redirect(base_url() . 'dashboard/kategori');
         } else {
             $id = $this->input->post('id');
             $where = array(
                 'kategori_id' => $id
             );
-            $data['kategori'] = $this->m_data->edit_data(' kategor i', $where)->result();
+            $data['kategori'] = $this->m_data->edit_data('kategori', $where)->result();
             $this->load->view('dashboard/v_header');
-            $this->load->view('dashboard/v _kategori_edit', $data);
+            $this->load->view('dashboard/v_kategori_edit', $data);
             $this->load->view('dashboard/v_footer');
         }
     }
