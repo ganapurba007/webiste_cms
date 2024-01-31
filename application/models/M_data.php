@@ -22,4 +22,9 @@ class M_data extends CI_Model
     {
         return $this->db->get_where($table, $where);
     }
+
+    function delete_data($table, $where)
+    {
+        return $this->db->delete($table, $where);
+    }
 }
