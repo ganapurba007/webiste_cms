@@ -69,4 +69,12 @@ class Dashboard extends CI_Controller
             $this->load->view('dashboard/v_footer');
         }
     }
+
+    public function kategori()
+    {
+        $data['kategori'] = $this->m_data->get_data('kategori')->result();
+        $this->load->view('dashboard/v_header');
+        $this->load->view('dashboard/v_kategori', $data);
+        $this->load->view('dashboard/v_footer');
+    }
 }
