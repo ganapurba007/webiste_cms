@@ -117,4 +117,30 @@ class Dashboard extends CI_Controller
         $this->load->view('dashboard/v_kategori_edit ', $data);
         $this->load->view('dashboard/v_footer');
     }
+    public function kategori_update()
+    {
+        $this->form_validation->set_rules('kategori', 'Kategori', 'required');
+        if ($this->form_validation->run() != false) {
+            $id = $this->input->post('id');
+            $kategori = $this->input->post('kategori');
+            $where = array(
+                'kategori_id' => $id
+            );
+            $data = array(
+                'kategori_nama' => $kategori,
+                'kategori_slug' => strtolower(url_title($kategori))
+            );
+            $this->m_data->update_data(' katego ri', $data, $where);
+            redirect(base_url() . 'dashboard/kategori');
+        } else {
+            $id = $this->input->post('id');
+            $where = array(
+                'kategori_id' => $id
+            );
+            $data['kategori'] = $this->m_data->edit_data(' kategor i', $where)->result();
+            $this->load->view('dashboard/v_header');
+            $this->load->view('dashboard/v _kategori_edit', $data);
+            $this->load->view('dashboard/v_footer');
+        }
+    }
 }
