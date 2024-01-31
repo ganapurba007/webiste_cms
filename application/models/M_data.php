@@ -12,4 +12,9 @@ class M_data extends CI_Model
     {
         return $this->db->get($table);
     }
+
+    function insert_data($table, $data)
+    {
+        return $this->db->insert($table, $data);
+    }
 }
