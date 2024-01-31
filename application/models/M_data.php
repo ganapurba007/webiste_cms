@@ -17,4 +17,9 @@ class M_data extends CI_Model
     {
         return $this->db->insert($table, $data);
     }
+
+    function edit_data($table, $where)
+    {
+        return $this->db->get_where($table, $where);
+    }
 }
