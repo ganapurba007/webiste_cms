@@ -171,4 +171,59 @@ class Dashboard extends CI_Controller
         $this->load->view('dashboard/v_artikel_tambah', $data);
         $this->load->view('dashboard/v_footer');
     }
+
+    public function artikel_aksi()
+    {
+        // Wajib isi judul, konten, dan kategori
+        $this->form_validation->set_rules('judul', 'Judul', 'required|is_unique[artikel.artikel_judul]');
+        $this->form_validation->set_rules('konten', 'Konten', 'required');
+        $this->form_validation->set_rules('kategori', 'Kategori', 'required');
+
+        // Membuat gambar wajib diisi
+        if (empty($_FILES['sampul']['name'])) {
+            $this->form_validation->set_rules('sampul', 'Gambar Sampul', 'required');
+        }
+
+        if ($this->form_validation->run() != false) {
+            $config['upload_path'] = './gambar/artikel/';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload('sampul')) {
+                // mengambil data tentang gambar
+                $gambar = $this->upload->data();
+                $tanggal = date('Y-m-d H:i:s');
+                $judul = $this->input->post('judul');
+                $slug = strtolower(url_title($judul));
+                $konten = $this->input->post('konten');
+                $sampul = $gambar['file_name'];
+                $author = $this->session->userdata('id');
+                $kategori = $this->input->post('kategori');
+                $status = $this->input->post('status');
+                $data = array(
+                    'artikel_tanggal' => $tanggal,
+                    'artikel_judul' => $judul,
+                    'artikel_slug' => $slug,
+                    'artikel_konten' => $konten,
+                    'artikel_sampul' => $sampul,
+                    'artikel_author' => $author,
+                    'artikel_kategori' => $kategori,
+                    'artikel_status' => $status
+                );
+                $this->m_data->insert_data('artikel', $data);
+                redirect(base_url() . 'dashboard/artikel');
+            } else {
+                $data['gambar_error'] = $this->upload->display_errors();
+                $data['kategori'] = $this->m_data->get_data('kategori')->result();
+                $this->load->view('dashboard/v_header');
+                $this->load->view('dashboard/v_artikel_tambah', $data);
+                $this->load->view('dashboard/v_footer');
+            }
+        } else {
+            $data['kategori'] = $this->m_data->get_data('kategori')->result();
+            $this->load->view('dashboard/v_header');
+            $this->load->view('dashboard/v_artikel_tambah', $data);
+            $this->load->view('dashboard/v_footer');
+        }
+    }
 }
