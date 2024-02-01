@@ -153,4 +153,13 @@ class Dashboard extends CI_Controller
         $this->m_data->delete_data('kategori', $where);
         redirect(base_url() . 'dashboard/kategori');
     }
+
+    public function artikel() {
+        $data['artikel'] = $this->db->query('SELECT * FROM artikel,kategori,pengguna WHERE artikel_kategori=kategori_id
+        AND artikel_author=pengguna_id
+        ORDER BY artikel_id DESC')->result();
+        $this->load->view('dashboard/v_header');
+        $this->load->view('dashboard/v_artikel',$data);
+        $this->load->view('dashboard/v_footer');
+        }
 }
