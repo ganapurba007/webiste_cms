@@ -154,12 +154,21 @@ class Dashboard extends CI_Controller
         redirect(base_url() . 'dashboard/kategori');
     }
 
-    public function artikel() {
+    public function artikel()
+    {
         $data['artikel'] = $this->db->query('SELECT * FROM artikel,kategori,pengguna WHERE artikel_kategori=kategori_id
         AND artikel_author=pengguna_id
         ORDER BY artikel_id DESC')->result();
         $this->load->view('dashboard/v_header');
-        $this->load->view('dashboard/v_artikel',$data);
+        $this->load->view('dashboard/v_artikel', $data);
         $this->load->view('dashboard/v_footer');
-        }
+    }
+
+    public function artikel_tambah()
+    {
+        $data['kategori'] = $this->m_data->get_data('kategori')->result();
+        $this->load->view('dashboard/v_header');
+        $this->load->view('dashboard/v_artikel_tambah', $data);
+        $this->load->view('dashboard/v_footer');
+    }
 }
