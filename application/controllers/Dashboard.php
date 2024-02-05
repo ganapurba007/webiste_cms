@@ -227,4 +227,16 @@ class Dashboard extends CI_Controller
             $this->load->view('dashboard/v_footer');
         }
     }
+
+    public function artikel_edit($id)
+    {
+        $where = array(
+            'artikel_id' => $id
+        );
+        $data['artikel'] = $this->m_data->edit_data('artikel', $where)->result();
+        $data['kategori'] = $this->m_data->get_data('kategori')->result();
+        $this->load->view('dashboard/v_header');
+        $this->load->view('dashbo ard/v_artikel_edit', $data);
+        $this->load->view('dashboard/v_footer');
+    }
 }
