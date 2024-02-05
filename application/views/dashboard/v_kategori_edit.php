@@ -28,8 +28,8 @@
                                 <form method="post" action="<?= base_url('dashboard/kategori_update'); ?>">
                                     <div class="form-group">
                                         <label>Nama Kategori</label>
-                                        <input type="hidden" name="id" value="<?= $k ->kategori_id?>">
-                                        <input type="text" name="kategori" class="form-control" placeholder="Masukan Nama Kategori . . . " value="<?= $k->kategori_nama;?>" required>
+                                        <input type="hidden" name="id" value="<?= $k->kategori_id ?>">
+                                        <input type="text" name="kategori" class="form-control" placeholder="Masukan Nama Kategori . . . " value="<?= $k->kategori_nama; ?>" required>
                                         <?= form_error('kategori'); ?>
                                     </div>
                                     <div class="form-group">

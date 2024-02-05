@@ -54,9 +54,9 @@
                                             </td>
                                             <td>
                                                 <?php if ($a->artikel_status == "publish") {
-                                                    echo "<span class='label label-success'>Publish</span>";
+                                                    echo "<span class='badge badge-success'>Publish</span>";
                                                 } else {
-                                                    echo "<span class='label label-danger'>Draft</span>";
+                                                    echo "<span class='badge badge-danger'>Draft</span>";
                                                 } ?>
                                             </td>
                                             <td>
@@ -64,10 +64,10 @@
                                                     <button class="btn btn-sm btn-success"><i class="fa fa-eye"></i></button>
                                                 </a>
                                                 <a href="<?= base_url() . 'dashboard/artikel_edit/' . $a->artikel_id; ?>">
-                                                    <button class="btn btn-sm btn-warning"><i class="nav-icon fas fa-edit"></i></button>
+                                                    <button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button>
                                                 </a>
-                                                <a href="<?= base_url() . 'dashboard/artikel_hapus/' . $a->artikel_id; ?>">
-                                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin Hapus Data Ini ?')"><i class="nav-icon fas fa-trash"></i></button>
+                                                <a href="<?= base_url() . 'dashboard/artikel_hapus/' . $a->artikel_id; ?>" onclick="return confirm('Yakin Hapus Data Ini ?')">
+                                                    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                                                 </a>
                                             </td>
                                         </tr>

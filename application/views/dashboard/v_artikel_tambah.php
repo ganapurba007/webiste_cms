@@ -25,21 +25,21 @@
                             <div class="row">
                                 <div class="col-lg-9">
                                     <div class="form-group">
-                                        <label>Judul Artikel</label>
-                                        <input type="text" name="judul" class="form-control" placeholder="Masukan Judul Artikel . . ." value="<?php echo set_value('judul'); ?>">
+                                        <label for="judul">Judul Artikel</label>
+                                        <input type="text" id="judul" name="judul" class="form-control" placeholder="Masukkan Judul Artikel . . ." value="<?php echo set_value('judul'); ?>">
                                         <br>
                                         <?php echo form_error('judul'); ?>
                                     </div>
                                     <div class="form-group">
-                                        <label>Konten Artikel</label>
+                                        <label for="konten">Konten Artikel</label>
                                         <?php echo form_error('konten'); ?>
                                         <textarea class="form-control" name="konten" id="summernote"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
-                                        <label>Kategori</label>
-                                        <select class="form-control" name="kategori">
+                                        <label for="kategori">Kategori</label>
+                                        <select class="form-control" name="kategori" id="kategori">
                                             <option value="">-- Pilih Kategori --</option>
                                             <?php foreach ($kategori as $k) { ?>
                                                 <option <?php echo (set_value('kategori') == $k->kategori_id) ? "selected='selected'" : ""; ?> value="<?php echo $k->kategori_id; ?>">
@@ -51,8 +51,8 @@
                                         <?php echo form_error('kategori'); ?>
                                     </div>
                                     <div class="form-group">
-                                        <label>Gambar</label>
-                                        <input type="file" name="sampul" class="form-control">
+                                        <label for="sampul">Gambar</label>
+                                        <input type="file" id="sampul" name="sampul" class="form-control">
                                         <br>
                                         <?php if (isset($gambar_error)) {
                                             echo $gambar_error;

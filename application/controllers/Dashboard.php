@@ -5,6 +5,7 @@ class Dashboard extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        date_default_timezone_set('Asia/Jakarta');
         $this->load->model('m_login');
         $this->load->model('m_data');
         /*
@@ -213,7 +214,7 @@ class Dashboard extends CI_Controller
                 $this->m_data->insert_data('artikel', $data);
                 redirect(base_url() . 'dashboard/artikel');
             } else {
-                $data['gambar_error'] = $this->upload->display_errors();
+                $this->form_validation->set_message('sampul', $data['gambar_error'] = $this->upload->display_errors());
                 $data['kategori'] = $this->m_data->get_data('kategori')->result();
                 $this->load->view('dashboard/v_header');
                 $this->load->view('dashboard/v_artikel_tambah', $data);
