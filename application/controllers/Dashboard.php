@@ -239,4 +239,62 @@ class Dashboard extends CI_Controller
         $this->load->view('dashbo ard/v_artikel_edit', $data);
         $this->load->view('dashboard/v_footer');
     }
+
+    public function artikel_update()
+    {
+        // Judul konten dan kategori wajid diisi
+        $this->form_validation->set_rules('judul', 'Judul', 'required');
+        $this->form_validation->set_rules('konten', 'Konten', 'required');
+        $this->form_validation->set_rules('kategori', 'Kategori', 'required');
+
+        if ($this->form_validation->run() != false) {
+            $id = $this->input->post('id');
+            $judul = $this->input->post('judul');
+            $slug = strtolower(url_title($judul));
+            $konten = $this->input->post('konten');
+            $kategori = $this->input->post('kategori');
+            $status = $this->input->post('status');
+            $where = array('artikel_id' => $id);
+            $data = array(
+                'artikel_judul' => $judul,
+                'artikel_slug' => $slug,
+                'artikel_konten' => $konten,
+                'artikel_kategori' => $kategori,
+                'artikel_status' => $status
+            );
+            $this->m_data->update_data('artikel', $data, $where);
+
+            if (!empty($_FILES['sampul']['name'])) {
+                $config['upload_path'] = './gambar/artikel/';
+                $config['allowed_types'] = 'gif|jpg|png';
+                $this->load->library('upload', $config);
+
+                if ($this->upload->do_upload('sampul')) {
+                    // Mengambil data Gambar
+                    $gambar = $this->upload->data();
+                    $data = array('artikel_sampul' => $gambar['file_name']);
+                    $this->m_data->update_data('artikel', $data, $where);
+                    redirect(base_url() . 'dashboard/artikel');
+                } else {
+                    $data['gambar_error'] = $this->upload->display_errors();
+                    $where = array('artikel_id' => $id);
+                    $data['artikel'] = $this->m_data->edit_data('artikel', $where)->result();
+                    $data['kategori'] = $this->m_data->get_data('kategori')->result();
+                    $this->load->view('dashboard/v_header');
+                    $this->load->view('dashboard/v_artikel_edit', $data);
+                    $this->load->view('dashboard/v_footer');
+                }
+            } else {
+                redirect(base_url() . 'dashboard/artikel');
+            }
+        } else {
+            $id = $this->input->post('id');
+            $where = array('artikel_id' => $id);
+            $data['artikel'] = $this->m_data->edit_data('artikel', $where)->result();
+            $data['kategori'] = $this->m_data->get_data('kategori')->result();
+            $this->load->view('dashboard/v_header');
+            $this->load->view('dashboard/v_artikel_edit', $data);
+            $this->load->view('dashboard/v_footer');
+        }
+    }
 }
