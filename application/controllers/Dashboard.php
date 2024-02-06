@@ -389,4 +389,13 @@ class Dashboard extends CI_Controller
             $this->load->view('dashboard/v_footer');
         }
     }
+
+    public function pages_hapus($id)
+    {
+        $where = array(
+            'halaman_id' => $id
+        );
+        $this->m_data->delete_data('halaman', $where);
+        redirect(base_url() . 'dashboard/pages');
+    }
 }
