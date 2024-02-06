@@ -356,4 +356,37 @@ class Dashboard extends CI_Controller
         $this->load->view('dashboard/v_pages_edit', $data);
         $this->load->view('dashboard/v_footer');
     }
+
+    public function pages_update()
+    {
+        // Wajib isi judul dan konten
+        $this->form_validation->set_rules('judul', 'Judul', 'required');
+        $this->form_validation->set_rules('konten', 'Konten', 'required');
+
+        if ($this->form_validation->run() != false) {
+            $id = $this->input->post('id');
+            $judul = $this->input->post('judul');
+            $slug = strtolower(url_title($judul));
+            $konten = $this->input->post('konten');
+
+            $where = array('halaman_id' => $id);
+
+            $data = array(
+                'halaman_judul' => $judul,
+                'halaman_slug' => $slug,
+                'halaman_konten' => $konten
+            );
+
+            $this->m_data->update_data('halaman', $data, $where);
+            redirect(base_url() . 'dashboard/pages');
+        } else {
+            $id = $this->input->post('id');
+            $where = array('halaman_id' => $id);
+            $data['halaman'] = $this->m_data->edit_data('halaman', $where)->result();
+
+            $this->load->view('dashboard/v_header');
+            $this->load->view('dashboard/v_pages_edit', $data);
+            $this->load->view('dashboard/v_footer');
+        }
+    }
 }
