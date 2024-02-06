@@ -321,4 +321,30 @@ class Dashboard extends CI_Controller
         $this->load->view('dashboard/v_pages_tambah');
         $this->load->view('dashboard/v_footer');
     }
+
+    public function pages_aksi()
+    {
+        // Wajib isi judul dan konten
+        $this->form_validation->set_rules('judul', 'Judul', 'required|is_unique[halaman.halaman_judul]');
+        $this->form_validation->set_rules('konten', 'Konten', 'required');
+
+        if ($this->form_validation->run() != false) {
+            $judul = $this->input->post('judul');
+            $slug = strtolower(url_title($judul));
+            $konten = $this->input->post('konten');
+
+            $data = array(
+                'halaman_judul' => $judul,
+                'halaman_slug' => $slug,
+                'halaman_konten' => $konten
+            );
+
+            $this->m_data->insert_data('halaman', $data);
+            redirect(base_url() . 'dashboard/pages');
+        } else {
+            $this->load->view('dashboard/v_header');
+            $this->load->view('dashboard/v_pages_tambah');
+            $this->load->view('dashboard/v_footer');
+        }
+    }
 }
