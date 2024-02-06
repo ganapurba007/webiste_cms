@@ -236,7 +236,7 @@ class Dashboard extends CI_Controller
         $data['artikel'] = $this->m_data->edit_data('artikel', $where)->result();
         $data['kategori'] = $this->m_data->get_data('kategori')->result();
         $this->load->view('dashboard/v_header');
-        $this->load->view('dashbo ard/v_artikel_edit', $data);
+        $this->load->view('dashboard/v_artikel_edit', $data);
         $this->load->view('dashboard/v_footer');
     }
 
@@ -296,5 +296,22 @@ class Dashboard extends CI_Controller
             $this->load->view('dashboard/v_artikel_edit', $data);
             $this->load->view('dashboard/v_footer');
         }
+    }
+
+    public function artikel_hapus($id)
+    {
+        $where = array(
+            'artikel_id' => $id
+        );
+        $this->m_data->delete_data('artikel', $where);
+        redirect(base_url() . 'dashboard/artikel');
+    }
+
+    public function pages()
+    {
+        $data['halaman'] = $this->m_data->get_data('halaman')->result();
+        $this->load->view('dashboard/v_header');
+        $this->load->view('dashboard/v_pages', $data);
+        $this->load->view('dashboard/v_footer');
     }
 }
