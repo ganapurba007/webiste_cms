@@ -314,4 +314,11 @@ class Dashboard extends CI_Controller
         $this->load->view('dashboard/v_pages', $data);
         $this->load->view('dashboard/v_footer');
     }
+
+    public function pages_tambah()
+    {
+        $this->load->view('dashboard/v_header');
+        $this->load->view('dashboard/v_pages_tambah');
+        $this->load->view('dashboard/v_footer');
+    }
 }
