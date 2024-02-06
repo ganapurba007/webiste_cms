@@ -347,4 +347,13 @@ class Dashboard extends CI_Controller
             $this->load->view('dashboard/v_footer');
         }
     }
+
+    public function pages_edit($id)
+    {
+        $where = array('halaman_id' => $id);
+        $data['halaman'] = $this->m_data->edit_data('halaman', $where)->result();
+        $this->load->view('dashboard/v_header');
+        $this->load->view('dashboard/v_pages_edit', $data);
+        $this->load->view('dashboard/v_footer');
+    }
 }
